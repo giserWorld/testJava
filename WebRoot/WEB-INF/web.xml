@@ -9,4 +9,18 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- FormServlet -->
+    <servlet>
+        <servlet-name>FormServlet</servlet-name>
+        <servlet-class>myServlet.FormServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FormServlet</servlet-name>
+        <url-pattern>/form</url-pattern>
+    </servlet-mapping>
+    <!-- 注册监听器 -->
+    <listener>
+        <listener-class>myServlet.MyListener</listener-class>
+    </listener>
 </web-app>
