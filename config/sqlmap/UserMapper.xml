@@ -5,6 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   
 <mapper namespace="test">    
     <select id="findUserById" parameterType="int" resultType="cn.com.mybatis.po.User">  
-      SELECT * FROM USER WHERE id=#{id}  
+      SELECT * FROM tb_user WHERE id=#{id}  
     </select>  
 </mapper>  

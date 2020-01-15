@@ -5,9 +5,8 @@ import java.util.Date;
 public class User implements Serializable{
 	//定义实体类字段,类成员变量
 	private int id;
-	private String username;
+	private String name;
 	private String password;
-	private Date birthday;
 	//构造方法
 	public User(){
 		
@@ -15,9 +14,8 @@ public class User implements Serializable{
 	public User(int id,String username,String password,Date birthday){
 		super();
 		this.id=id;
-		this.username=username;
+		this.name=username;
 		this.password=password;
-		this.birthday=birthday;
 	}
 	public int getId() {
 		return id;
@@ -25,23 +23,17 @@ public class User implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public Date getBirthday() {
-		return birthday;
-	}
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
 	}
 	
 }
