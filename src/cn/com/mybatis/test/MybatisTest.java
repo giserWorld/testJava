@@ -17,6 +17,7 @@ public class MybatisTest {
 		SqlSession sqlSession=dataConn.getSqlSession();
 		//通过sql映射关系，获取sql语句
 		User user=sqlSession.selectOne("test.findUserById",1);
+		//User user=sqlSession.selectOne("test.findUserById","x");
 		System.out.println("name:"+user.getName());
 		System.out.println("password:"+user.getPassword());
 		sqlSession.close();

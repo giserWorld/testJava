@@ -15,9 +15,7 @@ public class DataConnecton {
 	//成员方法
 	public SqlSession getSqlSession() throws IOException{
 		//mybatis配置文件
-		
-		//从配置文件中读取数据，并且创建SqlSessionFactory实例
-		InputStream inputStream = Resources.getResourceAsStream(resource);
+		InputStream inputStream = Resources.getResourceAsStream(resource);//从配置文件中读取数据，并且创建SqlSessionFactory实例
 		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		//创建与数据库交互的sqlSession实例
 		sqlSession=sqlSessionFactory.openSession();

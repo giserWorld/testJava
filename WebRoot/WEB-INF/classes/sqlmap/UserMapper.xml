@@ -2,9 +2,15 @@
 <!DOCTYPE mapper  
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
-  
-<mapper namespace="test">    
+
+<!-- tb_user表中数据操作   -->
+<mapper namespace="test"> 
+   <!-- 通过id值进行数据查询   -->
     <select id="findUserById" parameterType="int" resultType="cn.com.mybatis.po.User">  
-      SELECT * FROM tb_user WHERE id=#{id}  
+      	SELECT * FROM tb_user WHERE id=#{id}  
+    </select>  
+    <!-- 模糊查询   -->
+     <select id="findUserByName" parameterType="java.lang.String" resultType="cn.com.mybatis.po.User">  
+      SELECT * FROM tb_user WHERE name like '%${value}%'
     </select>  
 </mapper>  
