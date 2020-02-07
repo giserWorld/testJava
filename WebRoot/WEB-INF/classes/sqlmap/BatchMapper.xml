@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper  
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+	<!--sql映射配置文件   -->
+	<mapper namespace="test_batch"> 
+	   <cache/><!--开启mapper缓存-->
+	   <!-- 1.设置resultType为实体类-->
+	    <select id="findBatchCustomter" resultType="BatchCustomer">  
+	      SELECT batch.*,customer.username,customer.acno from batch,customer
+		  WHERE batch.cus_id=customer.cus_id;
+	    </select>  
+	    
+	    
+	    <!-- 2.设置resultMap，自定义映射实例类,resultMap,association一对一 -->
+	    <resultMap type="BatchItem" id="BatchInfoMap"><!--自定义映射resultMap-->
+			<!--设置SQL查询的数据字段于java实体类映射关系-->
+	    	<id column="batch_id" property="batch_id"></id><!--db.batch_id映射BatchItem.batch_id-->
+	    	<result column="cus_id" property="cus_id"></result><!--db.cus_id映射BatchItem.cus_id-->
+	   		<result column="number" property="number"></result>
+	   		<!--db.createtime字段映射为java的Date日期类型值-->
+	   		<result column="createtime" property="createtime" javaType="java.util.Date"></result>
+	   		<result column="note" property="note"></result>
+			<!--association,实例类关联的子类 -->
+	   		<association property="customer" javaType="Customer">
+	   			<id column="cus_id" property="cus_id"></id>
+	   			<result column="username" property="username"></result>
+	   			<result column="acno" property="acno"></result>
+	   			<result column="gender" property="gender"></result>
+	   			<result column="phone" property="phone"></result>
+	   		</association>
+	    </resultMap>
+	    <select id="findBatchCustomerToMap" resultMap="BatchInfoMap">  
+	      SELECT batch.*,customer.username,customer.acno from batch,customer
+		  WHERE batch.cus_id=customer.cus_id;
+	    </select>  
+	    
+	    <!-- 3.设置resultMap，自定义映射实例类,collection一对多 -->
+	    <resultMap id="BatchAndBatchDetailMap" type="BatchItem_multi"  extends="BatchInfoMap"><!--自定义映射resultMap-->
+			<!--collection 对应多条数据 -->
+	   		<collection property="batchdetail_list" ofType="Batchdetail">
+	   			<id column="id" property="id"></id>
+	   			<result column="batch_id" property="batch_id"></result>
+	   			<result column="product_id" property="product_id"></result>
+	   			<result column="product_num" property="product_num"></result>
+	   		</collection>
+	    </resultMap>
+	    <select id="findBatchAndBatchDetail" resultMap="BatchAndBatchDetailMap">  
+		    SELECT 
+				batch.*,
+				customer.username,customer.acno,
+				batchdetail.product_id,batchdetail.product_num
+			from 
+				batch,customer,batchdetail
+			WHERE 
+				batch.cus_id=customer.cus_id AND batch.batch_id=batchdetail.batch_id;
+	    </select>  
+	    
+	    <!--4.设置resultMap，自定义映射实例类,多对多查询 -->
+	    <resultMap id="UserAndProductsResultMap" type="Customer_extend">
+			<!--客户信息 -->
+	    	<result column="username" property="username"/>
+	    	<result column="acno" property="acno"/>
+	    	
+	    	<!--批次订单信息，一个客户对应多个订单 -->
+	   		<collection property="batchList" ofType="Batch_extend">
+	   			<id column="batch_id" property="batch_id"></id>
+	   			<result column="cus_id" property="cus_id"></result>
+	   			<result column="number" property="number"></result>
+	   			<result column="createtime" property="createtime" javaType="java.util.Date"></result>
+	   			<result column="note" property="note"></result>
+	   			
+	   			<!--一个订单对应多个理财产品 -->
+	   			<collection property="batchdetailList" ofType="Batchdetail_extend">
+	   				<id column="id" property="id"></id>
+		   			<result column="batch_id" property="batch_id"></result>
+		   			<result column="product_id" property="product_id"></result>
+		   			<result column="product_num" property="product_num"></result>
+		   			
+		   			<!--一个理财产品对应一个理财产品详情 -->
+		   			<association property="finacialProducts" javaType="FinacialProducts">
+		   				<id column="product_id" property="product_id"></id>
+			   			<result column="name" property="name"></result>
+			   			<result column="detail" property="detail"></result>
+			   			<result column="price" property="price"></result>
+			   			<result column="pic" property="pic"></result>
+			   			<result column="invasttime" property="invasttime" javaType="java.util.Date"></result>
+		   			</association>
+	   			</collection>
+	   		</collection>
+	    </resultMap>
+	    
+	    <select id="findUserAndProduct" resultMap="UserAndProductsResultMap">  
+		   SELECT
+				batch.*,
+				customer.username,
+				customer.acno,
+				batchdetail.product_id,
+				batchdetail.product_num,
+				finacial_products.name,
+				finacial_products.detail,
+				finacial_products.price
+			FROM
+				batch,
+				customer,
+				batchdetail,
+				finacial_products
+			WHERE
+				batch.cus_id=customer.cus_id
+				AND batchdetail.batch_id=batch.batch_id
+				AND finacial_products.product_id=batchdetail.product_id;
+	    </select>  
+	    
+	    <!-- ********************延迟加载********************** -->
+	    <resultMap id="BatchUserLazyLoadingResultMap" type="BatchItem" >
+	    	<id column="batch_id" property="batch_id"></id>
+	    	<result column="cus_id" property="cus_id"/>
+	    	<result column="number" property="number"/>
+	    	<result column="createtime" property="createtime" javaType="java.util.Date"/>
+	    	<result column="note" property="note"/>
+	    	
+	    	 <!-- 实现延迟加载用户信息 -->
+	    	<association property="customer" javaType="Customer"
+	    		select="findCustomerById" 
+	    		column="cus_id"
+	    	>
+	    	</association>
+	    </resultMap>
+	     <!-- 配置延迟的SQL -->
+	    <select id="findCustomerById" parameterType="int" resultType="Customer">
+	    	select * from customer WHERE cus_id=#{cus_id};
+	    </select>
+	    
+	    <select id="findBatchUserLazyLoading" resultMap="BatchUserLazyLoadingResultMap">
+	    	select * from batch;
+	    </select>
+	</mapper>  

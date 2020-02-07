@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class DataConnecton {
-	private String resource = "SqlMapConfig.xml";
+	private String resource = "SqlMapConfig.xml";//mybatis配置文件
 	private SqlSessionFactory sqlSessionFactory;
 	private SqlSession sqlSession;
 	//成员方法
@@ -17,7 +17,7 @@ public class DataConnecton {
 		//mybatis配置文件
 		InputStream inputStream = Resources.getResourceAsStream(resource);//从配置文件中读取数据，并且创建SqlSessionFactory实例
 		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-		//创建与数据库交互的sqlSession实例
+		//创建与数据库交互的sqlSession实例，mybatis核心api
 		sqlSession=sqlSessionFactory.openSession();
 		return sqlSession;
 	}
