@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">  
+  
+ <!-- mybatis-generator代码自动生成器配置 --> 
+<generatorConfiguration>  
+    <context id="testTables" targetRuntime="MyBatis3">  
+        <!-- 1.注释配置 -->
+        <commentGenerator>  
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->  
+            <property name="suppressAllComments" value="true" />  
+        </commentGenerator>
+          
+        <!--2.数据库连接的信息：驱动类、连接地址、用户名、密码 -->  
+        <jdbcConnection 
+        	driverClass="org.postgresql.Driver"  
+            connectionURL="jdbc:postgresql://localhost:5432/mybatis_test?characterEncoding=utf-8" 
+            userId="postgres"  
+            password="123456">  
+        </jdbcConnection>    
+  
+        <!--3.指定JDBC相关类型，是否被强制转换成某种类型-->  
+        <javaTypeResolver>
+        	<!--
+	        	1>默认false，把JDBC DECIMAL和 NUMERIC类型解析为Integer,
+	            2>为 true时把JDBC DECIMAL和NUMERIC类型解析为java.math.BigDecimal
+        	-->  
+            <property name="forceBigDecimals" value="false" />  
+        </javaTypeResolver>  
+  
+        <!-- 4.targetProject:生成java实体类的位置 -->  
+        <javaModelGenerator targetProject=".\src" targetPackage="cn.com.sm.po" >  
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->  
+            <property name="enableSubPackages" value="false" />  
+            <!-- 从数据库返回的值被清理前后的空格 -->  
+            <property name="trimStrings" value="true" />  
+        </javaModelGenerator>
+          
+        <!-- 5.targetProject:mapper映射文件生成的位置 -->  
+        <sqlMapGenerator targetProject=".\src" targetPackage="cn.com.sm.mapper" >  
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->  
+            <property name="enableSubPackages" value="false" />  
+        </sqlMapGenerator>
+          
+        <!-- 6.targetPackage：mapper接口生成的位置 -->  
+        <javaClientGenerator targetProject=".\src" targetPackage="cn.com.sm.mapper" type="XMLMAPPER" >  
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->  
+            <property name="enableSubPackages" value="false" />  
+        </javaClientGenerator>
+          
+        <!-- 7.指定数据库表 -->   
+        <table tableName="tb_user"></table>
+    </context>  
+</generatorConfiguration>  

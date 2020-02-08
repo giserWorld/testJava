@@ -14,12 +14,14 @@ public class ConnectDB {
 			
 			 Class.forName("org.postgresql.Driver");//加载postgresql数据库驱动
 			 //与数据库建立连接
-			 String db="localhost:5432/javaDB";//数据库
+			 String db="localhost:5432/db_java";//数据库
 			 String username="postgres";//用户名
 			 String password="123456";//密码
 			 String dbUrl="jdbc:postgresql://"+db;
 			 dbCon=DriverManager.getConnection(dbUrl,username,password);//与数据库建立连接,返回连接实例
 			 System.out.println("连接postgresql数据库成功！");
+			 String jdbc_version=dbCon.getMetaData().getDriverVersion();
+			 System.out.println("jdbc版本号："+jdbc_version);
 		}
 		catch(Exception e){
 			e.printStackTrace();
