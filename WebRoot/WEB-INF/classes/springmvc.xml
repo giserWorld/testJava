@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+	
+		
+<!-- 1.配置处理器映射器(springMVC包含多种处理器映射器) -->
+	<!-- ======非注解处理器映射器====== -->		
+		<!-- 1)处理器映射器(BeanNameUrlHandlerMapping)：将Bean的name作为url进行查找-->
+        <!--  <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" /> -->
+        <!-- 添加bean映射，以供处理器映射器查找("/queryFruits_test.action => FruitsControllerTest.java")-->
+		<bean name="/queryFruits_test.action" class="cn.com.mvc.controller.FruitsControllerTest" />
+        
+        
+        <!-- 2)处理器映射器(SimpleUrlHandlerMapping)：在内部直接配置url和hander映射关系-->
+<!--    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		  配置url和hander映射关系
+		  <property name="mappings">
+		    <props>
+		      <prop key="/queryFruits_test1.action">fruitsController</prop>
+		      <prop key="/queryFruits_test2.action">fruitsController</prop>
+		      <prop key="/queryFruits_test3.action">fruitsController2</prop>
+		    </props>
+		  </property>
+		</bean> -->
+		<!-- 配置:bean id为"fruitsController"映射到hander类-->
+        <bean id="fruitsController" class="cn.com.mvc.controller.FruitsControllerTest" />
+        <bean id="fruitsController2" class="cn.com.mvc.controller.FruitsControllerTest2" />
+        
+        
+<!-- 2.配置处理器适配器(springMVC包含多种处理器适配器-->
+		<!-- 1)处理器适配器(SimpleControllerHandlerAdapter)：实现Controller接口的Hander控制器-->
+        <!-- <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" /> -->
+		
+		<!-- 2)处理器适配器(HttpRequestHandlerAdapter)：实现Controller接口的Hander控制器-->
+		<!-- <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/> --> 
+		
+<!-- *快速配置注解处理器映射器、注解处理器适配器* -->
+	<mvc:annotation-driven></mvc:annotation-driven>	
+<!-- 配置controller扫描器，对某一个包下的所有类进行扫描，找出所有使用@Controller注解的Handler控制器类 -->	
+<context:component-scan base-package="cn.com.mvc.controller"></context:component-scan> 
+	
+	
+		
+<!-- 3.配置视图解析器(springMVC包含多种视图解析器)-->
+		<!-- 
+			"InternalResourceView"会把Controller处理器方法返回的模型属性
+			放到对应的request属性中，然后通过RequestDispatcher在服务器端吧请求重新定向
+			到目标URL
+		 -->	
+        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+		  <property name="prefix" value="/jsp"/>  
+		  <property name="suffix" value=".jsp"></property> 
+		</bean>
+		
+			
+</beans>

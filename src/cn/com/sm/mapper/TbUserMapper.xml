@@ -103,10 +103,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.com.sm.po.TbUser" >
-    insert into tb_user (id, username, password, 
+    insert into tb_user (username, password, 
       gender, email, province, 
       city, birthday)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{gender,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
       #{city,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE})
   </insert>
