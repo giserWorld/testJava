@@ -14,10 +14,41 @@
 		http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 	
-		<!-- 快速配置注解处理器映射器、注解处理器适配器 -->
-		<mvc:annotation-driven conversion-service="conversionService" validator="validator"></mvc:annotation-driven>	
 		
-		<!-- 配置@Controller扫描器，对某一个包下的所有类进行扫描，找出所有使用@Controller注解的Handler控制器类 -->	
+<!-- 1.配置处理器映射器(springMVC包含多种处理器映射器) -->
+	<!-- ======非注解处理器映射器====== -->		
+		<!-- 1)处理器映射器(BeanNameUrlHandlerMapping)：将Bean的name作为url进行查找-->
+        <!--  <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" /> -->
+        <!-- 添加bean映射，以供处理器映射器查找("/queryFruits_test.action => FruitsControllerTest.java")-->
+		<bean name="/queryFruits_test.action" class="cn.com.mvc.controller.FruitsControllerTest" />
+        
+        
+        <!-- 2)处理器映射器(SimpleUrlHandlerMapping)：在内部直接配置url和hander映射关系-->
+<!--    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		  配置url和hander映射关系
+		  <property name="mappings">
+		    <props>
+		      <prop key="/queryFruits_test1.action">fruitsController</prop>
+		      <prop key="/queryFruits_test2.action">fruitsController</prop>
+		      <prop key="/queryFruits_test3.action">fruitsController2</prop>
+		    </props>
+		  </property>
+		</bean> -->
+		<!-- 配置:bean id为"fruitsController"映射到hander类-->
+        <bean id="fruitsController" class="cn.com.mvc.controller.FruitsControllerTest" />
+        <bean id="fruitsController2" class="cn.com.mvc.controller.FruitsControllerTest2" />
+        
+        
+<!-- 2.配置处理器适配器(springMVC包含多种处理器适配器-->
+		<!-- 1)处理器适配器(SimpleControllerHandlerAdapter)：实现Controller接口的Hander控制器-->
+        <!-- <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" /> -->
+		
+		<!-- 2)处理器适配器(HttpRequestHandlerAdapter)：实现Controller接口的Hander控制器-->
+		<!-- <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/> --> 
+		
+<!-- *快速配置注解处理器映射器、注解处理器适配器* -->
+		<mvc:annotation-driven conversion-service="conversionService" validator="validator"></mvc:annotation-driven>	
+<!-- 配置controller扫描器，对某一个包下的所有类进行扫描，找出所有使用@Controller注解的Handler控制器类 -->	
 		<context:component-scan base-package="cn.com.mvc.controller"></context:component-scan> 
 		
 		<!-- 配置转换服务 --> 
@@ -44,16 +75,21 @@
 		    <property name="cacheSeconds" value="120" />  
 		</bean>   
 		
-		<!--配置视图解析器(springMVC包含多种视图解析器)-->
+		 	
+<!-- 3.配置视图解析器(springMVC包含多种视图解析器)-->
+		<!-- 
+			"InternalResourceView"会把Controller处理器方法返回的模型属性
+			放到对应的request属性中，然后通过RequestDispatcher在服务器端吧请求重新定向
+			到目标URL
+		 -->	
         <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
 		  <property name="prefix" value="/jsp"/>  
 		  <property name="suffix" value=".jsp"></property> 
 		</bean>
 		
-		<!-- 配置Spring mvc全局异常处理器-->		
+<!-- 配置Spring mvc全局异常处理器-->		
 		<bean class="cn.com.mvc.exception.UserExceptionResolver"></bean>  
-		
-		<!-- 全局配置拦截器，每一个接口请求都会被拦截-->			
+<!-- 全局配置拦截器，每一个接口请求都会被拦截-->			
 		<mvc:interceptors>  
 		    <!-- 多个拦截器，顺序执行 -->  
 		    <mvc:interceptor>  
@@ -63,7 +99,7 @@
 		    </mvc:interceptor>  
 		</mvc:interceptors> 
 		
-		<!-- 配置多类型文件上传解析器 -->
+<!-- 配置多类型文件上传解析器 -->
 		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 			<!-- 设置上传文件的最大尺寸为5MB -->
 			<property name="maxUploadSize">
@@ -71,7 +107,7 @@
 			</property>
 		</bean>
 		
-		<!-- restful,配置默认的servlet处理器，如果路径没有经过路径映射，则交给web应用服务器的Servlet进行静态资源的请求 -->		
+<!-- restful,配置默认的servlet处理器，如果路径没有经过路径映射，则交给web应用服务器的Servlet进行静态资源的请求 -->		
 		<mvc:default-servlet-handler/>
 		
 </beans>

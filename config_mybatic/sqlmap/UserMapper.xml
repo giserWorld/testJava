@@ -3,7 +3,11 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 
-	<!--sql映射配置文件   -->
+	<!--
+		---------sql映射配置文件-----------
+		1.sql映射占位符，一般用"#{field}"，like模糊查询时，占位符需使用"${field}" 
+		2.  
+	-->
 	<mapper namespace="test"> 
 	
 	   <!-- 1.通过id值进行数据查询,select   -->

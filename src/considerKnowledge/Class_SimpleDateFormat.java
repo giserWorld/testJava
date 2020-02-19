@@ -4,8 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**************************SimpleDateFormat*****************************
- *1.SimpleDateFormat是一个简单的日期格式格式化工具类
- *2.SimpleDateFormat 是一个各种项目中使用频度都很高的类，
+ *1.SimpleDateFormat类继承了DateFormat抽象类
+ *2.SimpleDateFormat是一个简单的日期格式格式化工具类
+ *3.SimpleDateFormat 是一个各种项目中使用频度都很高的类，
  *主要用于时间解析与格式化，频繁使用的主要方法有parse和format
  **********************************构造方法*******************************
  *1.实例化SimpleDateFormat时间模板支持的格式：

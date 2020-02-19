@@ -8,37 +8,25 @@
   <title>水果列表</title>  
 </head>  
 <body>
-  <form action="queryFruitsByCondition.action" method="post">
-        名称：<input type="text" name="name"/>&nbsp;&nbsp; 
-        产地：<input type="text" name="producing_area"/>
-     <input type="submit" value="搜索"/> <br/>
-     <!-- 显示错误信息 -->  
-	 <c:if test="${allErrors!=null}">  
-	    <c:forEach items="${allErrors}" var="error">  
-	        <font color="red">${error.defaultMessage}</font><br/>  
-	    </c:forEach>  
-	 </c:if>
-  </form>
-    
-  <hr/>
-  <h3>搜索结果</h3>  
+  <h3>多选数据</h3>  
+  <form action="fruitsArrayTest.action" method="post">
   <table width="300px;" border=1>  
     <tr>  
+      <td>选择</td>
       <td>名称</td>  
       <td>价格</td>    
       <td>产地</td> 
    </tr>  
-   <c:if test="${fruitsList==null}">
-      <b>搜索结果为空！</b>
-   </c:if>
    <c:forEach items="${fruitsList }" var="fruit">  
      <tr>  
+       <td><input type="checkbox" name="fids" value="${fruit.id}"/></td>  
        <td>${fruit.name }</td>  
        <td>${fruit.price }</td>    
        <td>${fruit.producing_area }</td>  
      </tr>  
     </c:forEach>  
-   </table> 
-   <a href="${pageContext.request.contextPath}/user/loginout.action">退出登录</a>  
+   </table>  <br/>
+   <input type="submit" value="批量测试提交">
+   </form> 
 </body>  
 </html> 

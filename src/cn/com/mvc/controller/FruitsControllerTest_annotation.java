@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.mvc.model.Fruits;
@@ -73,10 +75,24 @@ import cn.com.mvc.service.FruitsServiceImpl;
 
 //通过@Controller注解的方法标识它是一个控制器
 @Controller
-//@RequestMapping("/test")//映射方法url前缀路径
+@RequestMapping("test")//映射方法url前缀路径
 public class FruitsControllerTest_annotation {
 	
 	private FruitsService fruitsService = new FruitsServiceImpl();
+	
+	
+	//Spring MVC实现RESTful风格的接口,通过'@PathVariable'注解代码实现
+	//通过id查询水果信息
+	@RequestMapping(value="/queryFruit_id/{id}",method={RequestMethod.GET})  
+	public @ResponseBody Fruits queryFruit_id(Model model,
+			@PathVariable("id") Integer fruitId2) throws Exception{
+		
+		//通过id获取水果数据
+		Fruits fruit=fruitsService.queryFruitById(fruitId2);
+		//返回json数据格式
+		return fruit;
+	}
+	
 	
 	//通过id查询水果数据,get请求
 	@RequestMapping(value="/queryFruit",method=RequestMethod.GET)  
@@ -89,7 +105,7 @@ public class FruitsControllerTest_annotation {
 	}
 	
 	//查询水果列表数据
-	@RequestMapping("/queryFruitsList")
+	@RequestMapping("queryFruitsList")
 	public ModelAndView queryFruitsList() throws Exception{
 		//获取水果列表数据
 		List <Fruits> fruitsList=fruitsService.queryFruitsList();
