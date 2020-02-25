@@ -5,7 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>josn数据发送器</title>
-	<script type="text/javascript" src="./apiFiles/jquery/js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="../apiFiles/jquery/js/jquery-3.3.1.js"></script>
 </head>
 <body>
 	<!-- 文本框数据框 -->
@@ -35,6 +35,7 @@
 			$.ajax({
 				type:"post",
 				url:"http://localhost:8082/testJava/JsonTest.action",
+				//url:"http://localhost:8082/testJava/JsonTest2.action",
 				//contentType:"application/json;charset=utf-8",//提交参数的数据类型
 				contentType:"application/x-www-form-urlencoded;charset=utf-8",//默认
 				data:param2,//数据参数
