@@ -8,39 +8,31 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.testJava.dao.impl.TestDaoImpl;
-import com.testJava.entity.User;
+import com.testJava.dao.impl.MaskLayerDaoImpl;
+import com.testJava.entity.MaskLayer;
 
 
 @Controller
-public class TestController {
+public class MaskLayerController {
 	
 	@Autowired
-	TestDaoImpl testDaoImpl;
+	MaskLayerDaoImpl maskLayerDaoImpl;
 	
-	@RequestMapping("test/testDB.action")
+	//根据id查询数据
+	@RequestMapping("geo/getDataById.action")
 	@ResponseBody
-	public Object testDB(HttpServletRequest request,HttpServletResponse response){
+	public Object getDataById(Model model,String id,
+			HttpServletRequest request,HttpServletResponse response){
 		Map<String,Object> map=new HashMap<String,Object>();
 		
-		User user=testDaoImpl.get("1");
+		MaskLayer data=maskLayerDaoImpl.get(id);
 		map.put("mgs","获取数据成功！");
 		map.put("code","0");
-		map.put("data",user);
-		return map;
-	}
-	
-	@RequestMapping("test/test.action")
-	@ResponseBody
-	public Object test(HttpServletRequest request,HttpServletResponse response){
-		Map<String,Object> map=new HashMap<String,Object>();
-		
-		map.put("mgs","获取数据成功！");
-		map.put("code","0");
-		map.put("data","");
+		map.put("data",data);
 		return map;
 	}
 	

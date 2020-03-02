@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper  
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<!-- maskLayer表 -->
+<mapper namespace="com.testJava.mapper.maskLayerMapper">
+    
+    <!-- 根据id查询数据 -->
+    <select id="get" 
+    		parameterType="string"
+    		resultType="com.testJava.entity.MaskLayer">  
+    	select * from maskLayer WHERE id=#{id,jdbcType=VARCHAR}
+    </select> 
+    
+   
+</mapper> 

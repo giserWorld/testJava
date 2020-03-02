@@ -4,11 +4,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 
 <!-- mapper配置文件映射到mapper接口类 -->
-<mapper namespace="test">
-     <!-- 根据id查询数据 -->
+<mapper namespace="com.testJava.mapper.TestMapper">
+     <!-- 测试mapper -->
     <select id="findUserByName" 
     		parameterType="string"
     		resultType="com.testJava.entity.User">  
     	select * from tb_user WHERE name LIKE '%${name}%';
     </select> 
+    
+    <select id="get" 
+    		parameterType="string"
+    		resultType="com.testJava.entity.User">  
+    	select * from tb_user WHERE id=#{id,jdbcType=VARCHAR}
+    </select> 
+    
+   
 </mapper> 

@@ -31,7 +31,7 @@ public class DBConnectionTest {
 	public void testSelect(){
 		SqlSession sqlSession=getSqlession_mybatis();//获取sqlSession对象
 		//sql映射
-		User user=sqlSession.selectOne("test.findUserByName","小红");
+		User user=sqlSession.selectOne("com.testJava.mapper.TestMapper.findUserByName","小红");
 		
 		System.out.println("取出用户信息：");
 		System.out.println("名字："+user.getName());
