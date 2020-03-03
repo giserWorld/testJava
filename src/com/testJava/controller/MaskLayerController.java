@@ -78,7 +78,15 @@ public class MaskLayerController {
 			HttpServletRequest request,HttpServletResponse response){
 		Map<String,Object> map=new HashMap<String,Object>();
 		
-		MaskLayer data=maskLayerDaoImpl.get(id);
+		//设置跨域访问设置
+		response.setHeader("Access-Control-Allow-Origin","*");//指定允许其他域名访问
+		response.setHeader("Access-Control-Allow-Methods","POST,PUT,GET,OPTIONS,DELETE");//响应类型
+		response.setHeader("Access-Control-Max-Age","3600");
+		response.setHeader("Access-Control-Allow-Headers","x-requested-with");//响应头设置
+		//response.setHeader("Access-Control-Allow-Headers","Origin,X-Requested-With,Content-Type,Accept,Authorization,authorization");//响应头设置
+        response.setHeader("Access-Control-Allow-Credentials","true");
+	    
+	    MaskLayer data=maskLayerDaoImpl.get(id);
 		map.put("mgs","获取数据成功！");
 		map.put("code","0");
 		map.put("data",data);
