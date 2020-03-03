@@ -2,6 +2,7 @@ package com.testJava.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,6 +23,53 @@ public class MaskLayerController {
 	
 	@Autowired
 	MaskLayerDaoImpl maskLayerDaoImpl;
+	
+	
+	//更新数据
+	@RequestMapping("geo/updateData.action")
+	@ResponseBody
+	public Object updateData(Model model,
+			@RequestBody Map<String,Object> param,
+			HttpServletRequest request,HttpServletResponse response){
+		//param
+		String name=(String)param.get("name");
+		String geo=(String)param.get("geo");
+		//entity
+		MaskLayer entity=new MaskLayer();
+		entity.setId("1");
+		entity.setName(name);
+		entity.setGeom(geo);
+		maskLayerDaoImpl.update(entity);
+		//response
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("mgs","修改数据成功！");
+		map.put("code","0");
+		map.put("data","");
+		return map;
+	}
+	
+	//保存数据
+	@RequestMapping("geo/saveGeoData.action")
+	@ResponseBody
+	public Object saveGeoData(Model model,
+			@RequestBody Map<String,Object> param,
+			HttpServletRequest request,HttpServletResponse response){
+		String name=(String)param.get("name");
+		String geo=(String)param.get("geo");
+		String uuid=UUID.randomUUID().toString();
+		
+		MaskLayer entity=new MaskLayer();
+		entity.setId(uuid);
+		entity.setName(name);
+		entity.setGeom(geo);
+		maskLayerDaoImpl.insert(entity);
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("mgs","保存数据成功！");
+		map.put("code","0");
+		map.put("data","");
+		return map;
+	}
 	
 	//根据id查询数据
 	@RequestMapping("geo/getDataById.action")

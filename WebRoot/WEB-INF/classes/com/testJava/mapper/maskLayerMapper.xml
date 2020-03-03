@@ -6,12 +6,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- maskLayer表 -->
 <mapper namespace="com.testJava.mapper.maskLayerMapper">
     
+    <!-- 数据结果map映射 -->
+    <resultMap type="com.testJava.entity.MaskLayer" id="maskLayerRM">
+    	 <!-- pk -->
+    	<id property="id" column="id" jdbcType="VARCHAR"/>
+    	<!-- 一般属性 -->
+    	 <result property="name" column="name" jdbcType="VARCHAR"/>
+    </resultMap>
+    
     <!-- 根据id查询数据 -->
     <select id="get" 
     		parameterType="string"
     		resultType="com.testJava.entity.MaskLayer">  
-    	select * from maskLayer WHERE id=#{id,jdbcType=VARCHAR}
+    	select *,st_asgeojson(geom) as geo from masklayer WHERE id=#{id,jdbcType=VARCHAR}
     </select> 
     
+   	<!-- 插入数据,使用to_timestamp()时间转换函数-->
+	<insert id="insert" parameterType="com.testJava.entity.MaskLayer">
+		insert into masklayer 
+		(id,name,geom) 
+		values
+		(
+		 #{id,jdbcType=VARCHAR},
+		 #{name,jdbcType=VARCHAR},
+		 #{geo}
+		)
+	</insert>
+	
+	<!-- 更新数据,update -->
+	<update id="update" parameterType="com.testJava.entity.MaskLayer">
+		update masklayer
+		<set>
+			<if test="name!=null">name=#{name,jdbcType=VARCHAR},</if>
+			<if test="geo!=null">price=#{geo,jdbcType=VARCHAR},</if>
+		</set>
+		where id=#{id,jdbcType=VARCHAR}
+	</update>
    
 </mapper> 

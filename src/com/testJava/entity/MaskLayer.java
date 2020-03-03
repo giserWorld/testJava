@@ -4,7 +4,7 @@ package com.testJava.entity;
 public class MaskLayer {
 	private String id;//pk
 	private String name;//名称
-	private String geom;//几何数据
+	private String geo;//几何数据
 	
 	
 	public String getId() {
@@ -20,10 +20,10 @@ public class MaskLayer {
 		this.name = name;
 	}
 	public String getGeom() {
-		return geom;
+		return geo;
 	}
-	public void setGeom(String geom) {
-		this.geom = geom;
+	public void setGeom(String geo) {
+		this.geo = geo;
 	}
 	
 	
