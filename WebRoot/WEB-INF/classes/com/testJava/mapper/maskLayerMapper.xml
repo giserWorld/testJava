@@ -38,7 +38,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update masklayer
 		<set>
 			<if test="name!=null">name=#{name,jdbcType=VARCHAR},</if>
-			<if test="geo!=null">price=#{geo,jdbcType=VARCHAR},</if>
+			<!-- 将wkb字符串转为geometry对象 -->
+			<if test="geo!=null">geom=geometry(#{geo})</if>
+			<if test="geo_json!=null">geom=st_geomfromgeojson(#{geo_json})</if>
 		</set>
 		where id=#{id,jdbcType=VARCHAR}
 	</update>
