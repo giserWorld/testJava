@@ -30,6 +30,15 @@ public class MaskLayerController {
 	@ResponseBody
 	public Object updateData(Model model,
 			HttpServletRequest request,HttpServletResponse response){
+		
+		//设置允许跨域访问
+		response.setHeader("Access-Control-Allow-Origin","*");//指定允许其他域名访问
+		response.setHeader("Access-Control-Allow-Methods","POST,PUT,GET,OPTIONS,DELETE");//允许的响应类型
+		response.setHeader("Access-Control-Max-Age","3600");//"3600",预检请求时间
+		response.setHeader("Access-Control-Allow-Headers","x-requested-with");//响应头设置
+		//response.setHeader("Access-Control-Allow-Headers","Origin,X-Requested-With,Content-Type,Accept,Authorization,authorization");//响应头设置
+	    response.setHeader("Access-Control-Allow-Credentials","true");
+		
 		//param
 		String name=request.getParameter("name");
 		String geo=request.getParameter("geo");//wkt、wkb
@@ -53,26 +62,44 @@ public class MaskLayerController {
 		return map;
 	}
 	
-	//保存数据
-	@RequestMapping("geo/saveGeoData.action")
+	//保存为一条新数据("application/x-www-form-urlencoded")
+	@RequestMapping("geo/insertOneGeoData.action")
 	@ResponseBody
 	public Object saveGeoData(Model model,
-			@RequestBody Map<String,Object> param,
 			HttpServletRequest request,HttpServletResponse response){
-		String name=(String)param.get("name");
-		String geo=(String)param.get("geo");//wkt、wkb
-		String uuid=UUID.randomUUID().toString();
 		
+		//设置允许跨域访问
+		response.setHeader("Access-Control-Allow-Origin","*");//指定允许其他域名访问
+		response.setHeader("Access-Control-Allow-Methods","POST,PUT,GET,OPTIONS,DELETE");//允许的响应类型
+		response.setHeader("Access-Control-Max-Age","3600");//"3600",预检请求时间
+		response.setHeader("Access-Control-Allow-Headers","x-requested-with");//响应头设置
+		//response.setHeader("Access-Control-Allow-Headers","Origin,X-Requested-With,Content-Type,Accept,Authorization,authorization");//响应头设置
+        response.setHeader("Access-Control-Allow-Credentials","true");
+		
+		String name=request.getParameter("name");
+		String geo=request.getParameter("geo");//wkt、wkb
+		String geo_json=request.getParameter("geo_json");//geojson
+		String uuid=UUID.randomUUID().toString();
+		//entity
 		MaskLayer entity=new MaskLayer();
 		entity.setId(uuid);
-		entity.setName(name);
-		entity.setGeo(geo);
-		maskLayerDaoImpl.insert(entity);
-		
+		entity.setName("新蒙版数据");
+		if(!"".equals(geo_json)&&geo_json!=null){//geojson字符串
+			entity.setGeo_json(geo_json);
+		}
+		else{//wkt、wkb字符串
+			entity.setGeo(geo);
+		}
 		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("mgs","保存数据成功！");
+		map.put("mgs","新增数据成功！");
 		map.put("code","0");
 		map.put("data","");
+		if(("".equals(geo_json)&&geo_json==null)||("".equals(geo)&&geo==null)){
+			map.put("mgs","几何数据不能为空！");
+		}
+		else{
+			maskLayerDaoImpl.insert(entity);
+		}
 		return map;
 	}
 	

@@ -29,7 +29,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(
 		 #{id,jdbcType=VARCHAR},
 		 #{name,jdbcType=VARCHAR},
-		 #{geo}
+		 <if test="geo!=null">geometry(#{geo})</if>
+		 <if test="geo_json!=null">st_geomfromgeojson(#{geo_json})</if>
 		)
 	</insert>
 	
