@@ -18,7 +18,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/classes/beans.xml</param-value>
 	</context-param>
-	<!-- 注册监听器,tomcat启动时加载 -->
+	<!-- spring注册监听器(即spring入口),tomcat启动时初始化spring容器 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>

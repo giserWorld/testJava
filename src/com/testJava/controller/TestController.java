@@ -24,6 +24,15 @@ public class TestController {
 	@RequestMapping("test/testDB.action")
 	@ResponseBody
 	public Object testDB(HttpServletRequest request,HttpServletResponse response){
+		
+		//设置允许跨域访问
+		response.setHeader("Access-Control-Allow-Origin","*");//指定允许其他域名访问
+		response.setHeader("Access-Control-Allow-Methods","POST,PUT,GET,OPTIONS,DELETE");//允许的响应类型
+		response.setHeader("Access-Control-Max-Age","1");//"3600",预检请求时间
+		response.setHeader("Access-Control-Allow-Headers","x-requested-with");//响应头设置
+		//response.setHeader("Access-Control-Allow-Headers","Origin,X-Requested-With,Content-Type,Accept,Authorization,authorization");//响应头设置
+        response.setHeader("Access-Control-Allow-Credentials","true");
+		
 		Map<String,Object> map=new HashMap<String,Object>();
 		
 		User user=testDaoImpl.get("1");
@@ -36,8 +45,16 @@ public class TestController {
 	@RequestMapping("test/test.action")
 	@ResponseBody
 	public Object test(HttpServletRequest request,HttpServletResponse response){
-		Map<String,Object> map=new HashMap<String,Object>();
 		
+		//设置允许跨域访问
+		response.setHeader("Access-Control-Allow-Origin","*");//指定允许其他域名访问
+		response.setHeader("Access-Control-Allow-Methods","POST,PUT,GET,OPTIONS,DELETE");//允许的响应类型
+		response.setHeader("Access-Control-Max-Age","1");//"3600",预检请求时间
+		response.setHeader("Access-Control-Allow-Headers","x-requested-with");//响应头设置
+		//response.setHeader("Access-Control-Allow-Headers","Origin,X-Requested-With,Content-Type,Accept,Authorization,authorization");//响应头设置
+	    response.setHeader("Access-Control-Allow-Credentials","true");
+	    
+		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("mgs","获取数据成功！");
 		map.put("code","0");
 		map.put("data","");
