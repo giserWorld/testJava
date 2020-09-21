@@ -1,5 +1,17 @@
 package test_spring;
 
+//实体类 get,set
 public class Book {
-	public Book name;
+	public String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
+	
 }
