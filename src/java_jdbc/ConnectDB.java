@@ -1,5 +1,5 @@
 /**************************与postgreSQL数据库建立链接***********************/
-package test_jdbc;
+package java_jdbc;
 import java.sql.*;
 public class ConnectDB {
 	
@@ -14,7 +14,7 @@ public class ConnectDB {
 			
 			 Class.forName("org.postgresql.Driver");//加载postgresql数据库驱动
 			 //与数据库建立连接
-			 String db="localhost:5432/javaDB";//数据库
+			 String db="localhost:5432/javadb";//数据库
 			 String username="postgres";//用户名
 			 String password="123456";//密码
 			 String dbUrl="jdbc:postgresql://"+db;
