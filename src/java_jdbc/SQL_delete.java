@@ -1,4 +1,4 @@
-package test_jdbc;
+package java_jdbc;
 
 import java.sql.*;//导入包中的所有类
 

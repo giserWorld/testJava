@@ -1,4 +1,4 @@
-package test_jdbc;
+package java_jdbc;
 
 
 import java.sql.Connection;

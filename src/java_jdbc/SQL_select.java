@@ -1,4 +1,4 @@
-package test_jdbc;
+package java_jdbc;
 import java.sql.*;//导入sql数据库包中的所有类
 
 
@@ -21,6 +21,8 @@ public class SQL_select {
 				String name=res.getString("name");//获取数据name字段值
 				//String sex=res.getString("sex");//获取数据id字段值
 				//String age=res.getString("age");//获取数据age字段值
+				
+				//输出
 				//System.out.print("id:"+id+" ");
 				System.out.print("name:"+name+" ");
 				//System.out.print("sex:"+sex+" ");
@@ -49,7 +51,7 @@ public class SQL_select {
 		String query_allsj = "SELECT * FROM personinfo ORDER BY id ASC";
 		//2.模糊查询
 		String query_mhcx = "select * from personinfo WHERE name LIKE '小%'";
-		String sql_string = "select * from user_table";
+		String sql_string = "select * from tb_user";
 		ResultSet res=sql.executeQuery(sql_string);//查询的数据结果数据集
 		return res;
 	}
