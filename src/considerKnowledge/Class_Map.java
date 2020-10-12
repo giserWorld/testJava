@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /*********************Map类**********************
- *1.Map类是一个接口类型，不能直接被实例化
+ *1.Map类是一个接口类型，不能直接被实例化(泛型接口)
  *2.HashMap实现类:
-   1)
+    1)
  **/
 public class Class_Map {
 	public static void main(String[] args) {
