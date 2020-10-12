@@ -3,10 +3,10 @@
 /com
 /considerKnowledge
 /db
-/javaClass
+/db.properties
+/java_spring
+/log4j.properties
+/log4j2.properties
 /myServlet
 /practice
 /servlet
-/test
-/test_jdbc
-/test_spring

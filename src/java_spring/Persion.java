@@ -1,4 +1,4 @@
-package test_spring;
+package java_spring;
 
 //Persion实体类
 public class Persion {

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**************************ArrayList*****************************
- *1.List是抽象接口，不能被实例化
+ *1.List是抽象接口，不能被直接实例化
  *2.ArrayList继承List,是 List的实现类，可以被实例化,所以ArrayList实例是List类型
  *3.ArrayList没有继承Array,所以ArrayList实例不是是Array类型
  *4.ArrayList是一个可调整大小的数组，当元素添加到ArrayList时，其容量会自动增长

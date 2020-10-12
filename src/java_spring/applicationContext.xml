@@ -11,12 +11,12 @@
             http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
     
     <!--  配置bean -->       
-	<bean name="book" class="test_spring.Book">
+	<bean name="book" class="java_spring.Book">
 		<property name="name" value="英语书" />
 	</bean>
 	
 	<!--  配置bean -->       
-	<bean name="persion" class="test_spring.Persion">
+	<bean name="persion" class="java_spring.Persion">
 		<property name="b" ref="book" />
 	</bean>
 </beans>  

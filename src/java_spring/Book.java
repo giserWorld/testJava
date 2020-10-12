@@ -1,4 +1,4 @@
-package test_spring;
+package java_spring;
 
 //实体类 get,set
 public class Book {

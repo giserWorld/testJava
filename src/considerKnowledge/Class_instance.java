@@ -1,4 +1,4 @@
-package javaClass;
+package considerKnowledge;
 
 //调用不同的构造函数来实例化对象
 public class Class_instance {

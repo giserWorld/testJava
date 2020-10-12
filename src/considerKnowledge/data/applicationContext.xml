@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    
+    <!--  配置bean -->       
+	<bean name="book" class="java_spring.Book">
+		<property name="name" value="英语书" />
+	</bean>
+	
+	<!--  配置bean -->       
+	<bean name="persion" class="java_spring.Persion">
+		<property name="b" ref="book" />
+	</bean>
+</beans>  
