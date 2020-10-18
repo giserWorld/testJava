@@ -1,14 +1,11 @@
-/beans.xml
 /cn
 /com
 /considerKnowledge
 /db
-/db.properties
+/dom4j
+/java_jdbc
 /java_spring
-/log4j.properties
-/log4j2.properties
 /myServlet
 /practice
 /servlet
-/java_jdbc
-/dom4j
+/test
