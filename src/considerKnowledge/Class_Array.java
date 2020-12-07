@@ -13,6 +13,9 @@ package considerKnowledge;
  *2.直接初始化数据：
  	String[] strArray={"1","2"};
  *3.初始化Array时，必须指定数组长度
+ **************************测试demo*****************************
+ *1.for循环遍历数组
+ *2.foreach遍历
  **/
 //List功能类
 public class Class_Array {
@@ -22,12 +25,12 @@ public class Class_Array {
 		//空的String数组
 		String[] strArray2=new String[5];
 		
-		//1.for循环遍历数组
+/**************1.for循环遍历数组****************/
 		for(int i=0;i<strArray.length;i++){
 			String item=strArray[i];
 			//System.out.println(item);
 		}
-		//2.foreach遍历
+/**************2.foreach遍历****************/
 		for(String item:strArray){
 			System.out.println(item);
 		}
