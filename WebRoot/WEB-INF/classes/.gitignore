@@ -3,15 +3,10 @@
 /com
 /considerKnowledge
 /db
-/db.properties
+/dom4j
 /java_jdbc
-/log4j.properties
-/log4j2.properties
+/java_spring
 /myServlet
 /practice
 /servlet
-/springmvc-action.xml
-/sqlMapConfig.xml
 /test
-/dom4j
-/java_spring
