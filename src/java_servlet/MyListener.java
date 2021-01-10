@@ -1,4 +1,4 @@
-package myServlet;
+package java_servlet;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

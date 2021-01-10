@@ -1,0 +1,12 @@
+//================1.string=================//
+string.replace(char searchChar,char newChar):字符换字符，返回一个新字符串
+
+
+
+
+
+
+
+
+
+
